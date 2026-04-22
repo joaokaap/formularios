@@ -10,6 +10,13 @@ export default function Home() {
   const [cnh, setCNH] = useState(false)
   const [altura, setAltura] = useState("")
   const [cidade, setCidade] = useState("")
+  const [observacao, setObservacao] = useState("")
+  const [arquivo, setArquivo] = useState<File| null>(null)
+
+  function handlerArquivo(e: React.ChangeEvent<HTMLInputElement>){
+    const file = e.target.files?.[0]||null
+    setArquivo(file)
+  }
   // Funções
   function enviarFormulario(e: React.FormEvent) {
     // React.FormEvent
@@ -98,14 +105,33 @@ export default function Home() {
 
             </select>
             <div>
+              <label htmlFor="obsevacao">Observação</label>
+              <textarea
+              name="obsvacao"
+              id="observacao"
+              onChange={(e) => setObservacao(e.target.value)}
+              value={observacao}
+              >
+
+              </textarea>
+
+            </div>
+            <div>
+            <label htmlFor="arquivo">Arquivo</label>
+            <input type="file" onChange={handlerArquivo}/>
+
+            </div>
+
+
+            <div>
               <button type="submit">Enviar</button>
               <button type="reset">Limpar</button>
             </div>
           </div>
-
         </form>
         <h3>{nome}</h3>
       </main>
     </div>
   );
 }
+
